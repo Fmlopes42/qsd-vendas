@@ -7,9 +7,9 @@ Style/FrozenStringLiteralComment:
 AllCops:
   TargetRubyVersion: 2.3
   Include:
-    - '**/Rakefile'
     - '**/config.ru'
   Exclude:
+    - 'lib/tasks/capistrano.rake'
     - 'bin/**/*'
     - 'vendor/**/*'
     - 'db/**/*'
