@@ -5,10 +5,21 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag '//assets.locaweb.com.br/locastyle/3.10.0/stylesheets/locastyle.css' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'header' %>
+    <%= render 'left_bar' %>
+    <main class="ls-main">
+      <div class="container-fluid">
+        <h1 class="ls-title-intro ls-ico-home"><%= yield :page_title %></h1>
+        <%= (flash.empty?)? '' : render('flash_alert') %>
+        <%= yield %>
+      </div>
+    </main>
+
+    <%= javascript_include_tag '//assets.locaweb.com.br/locastyle/3.10.0/javascripts/locastyle.js' %>
   </body>
 </html>
