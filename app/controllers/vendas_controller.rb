@@ -10,6 +10,13 @@ class VendasController < ApplicationController
     { name: 'Premium', description: '', details: '' }
   ].freeze
 
+  PRICE_LIST = [
+    { subscription: 'Mensal', price: 15 },
+    { subscription: 'Trimestral', price: 40 },
+    { subscription: 'Semestral', price: 75 },
+    { subscription: 'Anual', price: 140 }
+  ].freeze
+
   def index
     @products = PRODUCTS_LIST
   end
@@ -17,5 +24,11 @@ class VendasController < ApplicationController
   def product
     @product = params[:product]
     @plans = PLANS_LIST
+  end
+
+  def plan
+    @product = params[:product]
+    @plan = params[:plan]
+    @prices = PRICE_LIST
   end
 end
