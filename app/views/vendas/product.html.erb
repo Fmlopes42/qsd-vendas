@@ -1,0 +1,10 @@
+<section class="product">
+  <h3><%= @product %></h3>
+  <% @plans.each do |plan| %>
+    <%= link_to plan[:name], plan_path(plan[:name]) %>
+    <%= plan[:description] %>
+    <%= plan[:details] %>
+  <% end %>
+</section>
+
+<%= link_to 'Voltar', root_path %>
