@@ -1,3 +1,9 @@
+<% content_for :header_title do %>
+  Produtos
+<% end %>
+<% content_for :page_title do %>
+  Nossos produtos
+<% end %>
 <% @products.each do |product| %>
   <%= link_to product[:name], product_path(product[:name]) %>
 <% end %>
