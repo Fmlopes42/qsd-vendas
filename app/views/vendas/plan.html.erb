@@ -1,0 +1,7 @@
+<section id="plan">
+  <h3><%= @product %> / <%= @plan %></h3>
+  <% @prices.each do |price| %>
+    <p><%= link_to price[:subscription], '#' %>
+    <%= link_to price[:price], '#' %></p>
+  <% end %>
+</section>
