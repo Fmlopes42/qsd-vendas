@@ -1,0 +1,40 @@
+<% content_for :header_title do %>
+  Criar Conta
+<% end %>
+
+<section id='user-form'>
+  <%= form_for(resource, as: resource_name,
+                         url: registration_path(resource_name),
+                         class: 'ls-form row') do |f| %>
+    <fieldset>
+      <%= devise_error_messages! %>
+
+      <%= f.label :name, class: 'ls-label col-md-3' do %>
+        <b class="ls-label-text"><%= t('activerecord.attributes.user.name') %></b>
+        <%= f.text_field :name, autofocus: true %>
+      <% end %>
+
+      <%= f.label :email, class: 'ls-label col-md-3' do %>
+        <b class="ls-label-text"><%= t('activerecord.attributes.user.email') %></b>
+        <%= f.email_field :email, autofocus: true %>
+      <% end %>
+
+      <%= f.label :password, class: 'ls-label col-md-3' do %>
+        <b class="ls-label-text"><%= t('activerecord.attributes.user.password') %></b>
+        <% if @minimum_password_length %>
+          <p class="ls-label-info">Mínimo de <%= @minimum_password_length %> caracteres</p>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off" %>
+      <% end %>
+
+      <%= f.label :password_confirmation, class: 'ls-label col-md-3' do %>
+        <b class="ls-label-text"><%= t('activerecord.attributes.user.password_confirmation') %></b>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <% end %>
+
+      <div class="ls-actions-btn">
+        <%= f.submit t('buttons.create_account'), class: 'ls-btn' %>
+      </div>
+    </fieldset>
+  <% end %>
+</section>

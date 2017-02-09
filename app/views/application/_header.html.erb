@@ -10,19 +10,31 @@
 
     <!-- Dropdown com detalhes da conta de usuário -->
     <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-      <a href="#" class="ls-ico-user">
-        <img src="/locawebstyle/assets/images/locastyle/avatar-example.jpg" alt="" />
-        <span class="ls-name">Usuário</span>
-        (username)
-      </a>
+      <% if user_signed_in? %>
+        <a href="#" class="ls-ico-user">
+          <img src="/locawebstyle/assets/images/locastyle/avatar-example.jpg" alt="" />
+          <span class="ls-name"><%= current_user.name %></span>
+        </a>
 
-      <nav class="ls-dropdown-nav ls-user-menu">
-        <ul>
-          <li><a href="#">Meus dados</a></li>
-          <li><a href="#">Pedidos</a></li>
-          <li><a href="#">Sair</a></li>
-        </ul>
-      </nav>
+        <nav class="ls-dropdown-nav ls-user-menu">
+          <ul>
+            <li><a href="#">Meus dados</a></li>
+            <li><a href="#">Pedidos</a></li>
+            <li><%= link_to t('nav.sign_out'), destroy_user_session_path, method: 'DELETE' %></li>
+          </ul>
+        </nav>
+      <% else %>
+        <a href="#" class="ls-ico-user">
+          <img src="/locawebstyle/assets/images/locastyle/avatar-example.jpg" alt="" />
+          <span class="ls-name"><%= t('nav.my_account')%></span>
+        </a>
+
+        <nav class="ls-dropdown-nav ls-user-menu">
+          <ul>
+            <li><%= link_to t('nav.sign_in'), new_user_session_path %></li>
+          </ul>
+        </nav>
+      <% end %>
     </div>
   </div>
 
@@ -38,4 +50,3 @@
 
   <!-- Nome do produto/marca sem sidebar quando for o pre-painel  -->
 </div>
-
