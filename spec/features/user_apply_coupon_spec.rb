@@ -6,7 +6,7 @@ feature 'User apply coupon' do
 
     order = create(:order, coupon: nil)
 
-    visit order_checkout_path(order.id)
+    visit order_checkout_path(order)
 
     fill_in 'Insira seu cupom', with: coupon.key
     click_on 'Aplicar Cupom'
@@ -16,5 +16,19 @@ feature 'User apply coupon' do
 
     expect(page).to have_content 'Cupom aplicado com sucesso'
     expect(page).not_to have_css 'form#coupon_form'
+  end
+
+  scenario 'apply invalid coupon' do
+    order = create(:order, coupon: nil)
+    visit order_checkout_path(order)
+
+    fill_in 'Insira seu cupom', with: 'CupomInvalido'
+    click_on 'Aplicar Cupom'
+
+    within('strong#price') do
+      expect(page).to have_content order.price
+    end
+    expect(page).to have_content 'Cupom inválido'
+    expect(page).to have_css 'form#coupon_form'
   end
 end

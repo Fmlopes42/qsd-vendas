@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    product = params[:prodct]
+    product = params[:product]
     plan = params[:plan]
     price = params[:price]
     period = params[:period]
