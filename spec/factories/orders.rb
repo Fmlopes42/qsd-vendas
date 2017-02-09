@@ -2,8 +2,8 @@ FactoryGirl.define do
   factory :order do
     product "MyString"
     plan "MyString"
-    price "MyString"
+    price "300"
     period "MyString"
-    coupon "MyString"
+    coupon nil
   end
 end

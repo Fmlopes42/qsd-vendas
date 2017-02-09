@@ -31,4 +31,17 @@ class VendasController < ApplicationController
     @plan = params[:plan]
     @prices = PRICE_LIST
   end
+
+  def checkout
+    @order = Order.find(params[:order])
+  end
+
+  def apply_coupon
+    @order = Order.find params[:order]
+    coupon = Coupon.find params[:coupon]
+    @order.apply_coupon coupon
+
+    flash[:success] = 'Cupom aplicado com sucesso'
+    redirect_to order_checkout_path @order
+  end
 end
