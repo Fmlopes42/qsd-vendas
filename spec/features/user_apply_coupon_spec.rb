@@ -4,7 +4,7 @@ feature 'User apply coupon' do
   scenario 'successfuly' do
     coupon = Coupon.new key: 'cp001', type: 'fixed', value: 50
 
-    order = create(:order)
+    order = create(:order, coupon: nil)
 
     visit order_checkout_path(order.id)
 

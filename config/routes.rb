@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   get '/checkout/:order', to: 'vendas#checkout', as: 'order_checkout'
   get '/:product', to: 'vendas#product', as: 'product'
   get '/:product/:plan', to: 'vendas#plan', as: 'plan'
+  get '/:product/:plan/:period/:price', to: 'orders#create', as: 'create_order'
 
 end
