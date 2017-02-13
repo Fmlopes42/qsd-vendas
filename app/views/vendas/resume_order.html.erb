@@ -28,5 +28,6 @@
 </div>
 
 <div class='ls-box' id="order_actions">
-  <%= link_to 'Finalizar Pedido', finish_order_path(@order), class: 'ls-btn-primary ls-float-right' %>
+  <%= link_to 'Cancelar', cancel_order_path(@order), { method: :put, class: 'ls-btn-danger ls-float-right' } %>
+  <%= link_to 'Finalizar Pedido', finish_order_path(@order), { method: :put, class: 'ls-btn-primary ls-float-right' } %>
 </div>

@@ -9,6 +9,22 @@ class OrdersController < ApplicationController
     @order = Order.find params[:id]
   end
 
+  def cancel
+    @order = Order.find params[:id]
+    @order.status = 'canceled'
+    @order.save
+    flash[:danger] = 'Pedido cancelado com sucesso'
+    redirect_to @order
+  end
+
+  def finish
+    @order = Order.find params[:id]
+    @order.status = 'closed'
+    @order.save
+    flash[:success] = 'Pedido finalizado com sucesso'
+    redirect_to @order
+  end
+
   private
 
   def order_params

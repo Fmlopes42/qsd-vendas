@@ -53,12 +53,4 @@ class VendasController < ApplicationController
   def resume_order
     @order = Order.find(params[:order])
   end
-
-  def finish_order
-    @order = Order.find(params[:order])
-    @order.status = 'closed'
-    @order.save
-    flash[:success] = 'Pedido finalizado com sucesso'
-    redirect_to @order
-  end
 end
