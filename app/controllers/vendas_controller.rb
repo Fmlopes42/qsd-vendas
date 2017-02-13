@@ -17,6 +17,8 @@ class VendasController < ApplicationController
     { subscription: 'Anual', price: 140 }
   ].freeze
 
+  before_action :authenticate_user!, only: [:checkout]
+
   def index
     @products = PRODUCTS_LIST
   end
@@ -34,6 +36,10 @@ class VendasController < ApplicationController
 
   def checkout
     @order = Order.find(params[:order])
+    unless @order.user_id?
+      @order.user = current_user
+      @order.save
+    end
   end
 
   def apply_coupon
