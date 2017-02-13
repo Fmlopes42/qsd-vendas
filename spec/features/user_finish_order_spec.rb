@@ -16,6 +16,7 @@ feature 'User finish order' do
       expect(page).to have_content order.plan
       expect(page).to have_content order.price
       expect(page).to have_content order.period
+      expect(page).to have_css(:span, text: 'Finalizado')
     end
   end
 end
