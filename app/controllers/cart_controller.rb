@@ -1,4 +1,4 @@
-class VendasController < ApplicationController
+class CartController < ApplicationController
   PRODUCTS_LIST = [
     { name: 'Hospedagem', id: 1 },
     { name: 'Registro de Dominios', id: 2 },
@@ -17,17 +17,12 @@ class VendasController < ApplicationController
     { subscription: 'Anual', price: 140 }
   ].freeze
 
-  def index
-  end
-
-  def product
+  def plans
     @product = params[:product]
     @plans = PLANS_LIST
   end
 
-  def plan
-    @product = params[:product]
-    @plan = params[:plan]
-    @prices = PRICE_LIST
+  def products
+    @products = PRODUCTS_LIST
   end
 end

@@ -5,5 +5,5 @@
   Nossos produtos
 <% end %>
 <% @products.each do |product| %>
-  <%= link_to product[:name], product_path(product[:name]) %>
+  <%= link_to product[:name], product_plans_cart_path(product[:name]) %>
 <% end %>

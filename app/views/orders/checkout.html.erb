@@ -29,7 +29,7 @@
 
 <% if @order.coupon.nil? %>
   <div class='ls-box'>
-  <%= form_tag(order_apply_coupon_path(@order), { method: :put, class: 'ls-form', id: 'coupon_form' }) do %>
+  <%= form_tag(coupon_order_path(@order), { method: :put, class: 'ls-form', id: 'coupon_form' }) do %>
     <fieldset>
       <%= label_tag :coupon, 'Insira seu cupom' %>
       <%= text_field_tag :coupon %>
