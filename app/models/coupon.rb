@@ -1,7 +1,7 @@
 class Coupon
   VALIDS_COUPONS = {
     cp001: { type: 'fixed', value: 50 },
-    cp002: { type: 'percent', value: 10 }
+    cpr001: { type: 'percent', value: 10 }
   }.freeze
 
   attr_reader :key, :value, :type

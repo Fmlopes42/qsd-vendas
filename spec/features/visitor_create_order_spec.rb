@@ -10,7 +10,7 @@ feature 'Visitor create order spec' do
 
     expect(page).to have_content order.product
     expect(page).to have_content order.plan
-#    expect(page).to have_content order.period
+    expect(page).to have_content order.period
     expect(page).to have_content order.price
   end
 end
