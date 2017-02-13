@@ -1,0 +1,40 @@
+<% content_for :header_title do %>
+  Pedido Checkout
+<% end %>
+<% content_for :page_title do %>
+  Resumo
+<% end %>
+<div class="ls-list">
+  <header class="ls-list-header">
+    <div class="ls-list-title col-md-9">
+      <strong><%= @order.product %></strong>
+      <small>Fake Product Name I </small>
+    </div>
+  </header>
+  <div class="ls-list-content ">
+    <div class="col-xs-12 col-md-6">
+      <span class="ls-list-label">Plano</span>
+      <strong><%= @order.plan %></strong>
+    </div>
+    <div class="col-xs-12 col-md-3">
+      <span class="ls-list-label">Periodicidade</span>
+      <strong id='period'><%= @order.period %></strong>
+    </div>
+     <div class="col-xs-12 col-md-3">
+      <span class="ls-list-label">Valor</span>
+      <strong id='price'><%= @order.price %></strong>
+     </div>
+  </div>
+</div>
+
+<% if @order.coupon.nil? %>
+  <div class='ls-box'>
+  <%= form_tag(order_apply_coupon_path(@order), { method: :put, class: 'ls-form', id: 'coupon_form' }) do %>
+    <fieldset>
+      <%= label_tag :coupon, 'Insira seu cupom' %>
+      <%= text_field_tag :coupon %>
+      <%= submit_tag 'Aplicar Cupom', class: 'ls-btn' %>
+    </fieldset>
+  <% end %>
+  </div>
+<% end %>

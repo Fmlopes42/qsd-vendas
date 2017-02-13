@@ -43,10 +43,9 @@
 
   <!-- Nome do produto/marca com sidebar -->
   <h1 class="ls-brand-name">
-    <%= link_to root_path do %>
+    <%= link_to '#', { class: 'ls-ico-earth' } do %>
       <%= yield :header_title %>
     <% end %>
-    <%= link_to '', root_path, class: 'ls-ico-earth'%>
   </h1>
 
   <!-- Nome do produto/marca sem sidebar quando for o pre-painel  -->
