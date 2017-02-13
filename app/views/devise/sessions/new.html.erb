@@ -4,7 +4,6 @@
                          class: 'ls-form row') do |f| %>
     <fieldset>
       <%= devise_error_messages! %>
-
       <%= f.label :email, class: 'ls-label col-md-3' do %>
         <b class="ls-label-text"><%= t('activerecord.attributes.user.email') %></b>
         <%= f.email_field :email, autofocus: true %>

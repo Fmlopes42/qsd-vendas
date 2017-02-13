@@ -11,6 +11,7 @@ feature 'Visitor chooses a price' do
       expect(page).to have_link price.to_s
     end
 
-    expect(page).to have_css('h3', 'Hospedagem / Premium')
+    expect(page).to have_css('h3', text: 'Hospedagem / Premium')
   end
+
 end
