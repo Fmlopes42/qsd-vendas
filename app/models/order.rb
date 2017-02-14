@@ -1,6 +1,8 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
 
+  enum status: [:opened, :closed, :canceled]
+  
   def apply_coupon(informed_coupon)
     self.coupon = informed_coupon.key
 

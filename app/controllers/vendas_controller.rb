@@ -55,4 +55,8 @@ class VendasController < ApplicationController
 
     redirect_to order_checkout_path @order
   end
+
+  def resume_order
+    @order = Order.find(params[:order])
+  end
 end
