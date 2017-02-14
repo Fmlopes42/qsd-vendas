@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+  before_action :set_menus
   PRODUCTS_LIST = [
     { name: 'Hospedagem', id: 1 },
     { name: 'Registro de Dominios', id: 2 },

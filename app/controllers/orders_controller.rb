@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :set_menus, only: [:show, :checkout, :resume]
   before_action :authenticate_user!, except: [:create]
   before_action :authenticate_user_to_order!, except: [:create, :checkout]
 

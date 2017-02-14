@@ -13,6 +13,9 @@ pt-BR:
     create_account: Criar Conta
     sign_in: Entrar
   nav:
+    button_account:
+      logged: Minha Conta
+      unlogged: Acessar Conta
     my_account: Minha Conta
     sign_in: Entrar
     sign_out: Sair

@@ -1,0 +1,12 @@
+<a href="#" class="ls-ico-user">
+  <%= image_tag 'avatar.png' %>
+  <span class="ls-name"><%= t('nav.button_account.unlogged')%></span>
+</a>
+
+<nav class="ls-dropdown-nav ls-user-menu">
+  <ul>
+    <li><%= link_to t('nav.sign_in'), new_user_session_path %></li>
+    <li><%= link_to t('nav.sign_up'), new_user_registration_path %></li>
+  </ul>
+</nav>
+
