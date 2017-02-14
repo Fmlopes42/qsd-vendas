@@ -4,7 +4,7 @@ feature 'Visitor create order spec' do
   scenario 'successfully' do
     order = build(:order)
 
-    visit plan_path order.product, order.plan
+    visit plan_prices_cart_path order.product, order.plan
 
     click_on 'Mensal'
 

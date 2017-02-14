@@ -16,10 +16,8 @@ Rails.application.routes.draw do
     member do
       get 'products'
       get ':product/plans', to: 'cart#plans', as: 'product_plans'
-      get ':product/:plan/prices', to: 'cart#prices'
-      get ':product/:plan/:period/:price', to: 'orders#create', as: 'create_order'
+      get ':product/:plan/prices', to: 'cart#prices', as: 'plan_prices'
+      post ':product/:plan/:period/:price', to: 'orders#create', as: 'create_order'
     end
   end
-
-  get '/:product/:plan', to: 'vendas#plan', as: 'plan'
 end

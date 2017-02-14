@@ -1,7 +1,7 @@
 <section id="plan">
   <h3><%= @product %> / <%= @plan %></h3>
   <% @prices.each do |price| %>
-    <p><%= link_to price[:subscription], create_order_cart_path(price: price[:price], period: price[:subscription]) %>
+    <p><%= link_to price[:subscription], create_order_cart_path(price: price[:price], period: price[:subscription]), method: 'post' %>
     <%= link_to price[:price], '#' %></p>
   <% end %>
 </section>

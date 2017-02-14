@@ -1,7 +1,7 @@
 <section class="product">
   <h3><%= @product %></h3>
   <% @plans.each do |plan| %>
-    <%= link_to plan[:name], plan_path(@product, plan[:name]) %>
+    <%= link_to plan[:name], plan_prices_cart_path(@product, plan[:name]) %>
     <%= plan[:description] %>
     <%= plan[:details] %>
   <% end %>

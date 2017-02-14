@@ -22,6 +22,12 @@ class CartController < ApplicationController
     @plans = PLANS_LIST
   end
 
+  def prices
+    @product = params[:product]
+    @plan = params[:plan]
+    @prices = PRICE_LIST
+  end
+
   def products
     @products = PRODUCTS_LIST
   end
