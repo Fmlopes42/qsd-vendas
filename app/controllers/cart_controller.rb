@@ -1,15 +1,5 @@
 class CartController < ApplicationController
   before_action :set_menus
-  PRODUCTS_LIST = [
-    { name: 'Hospedagem', id: 1 },
-    { name: 'Registro de Dominios', id: 2 },
-    { name: 'Email Marketing', id: 3 }
-  ].freeze
-  PLANS_LIST = [
-    { name: 'Básico', description: '', details: '' },
-    { name: 'Profissional', description: '', details: '' },
-    { name: 'Premium', description: '', details: '' }
-  ].freeze
 
   PRICE_LIST = [
     { subscription: 'Mensal', price: 15 },
@@ -20,7 +10,7 @@ class CartController < ApplicationController
 
   def plans
     @product = params[:product]
-    @plans = PLANS_LIST
+    @plans = Plan.all
   end
 
   def prices
@@ -30,6 +20,6 @@ class CartController < ApplicationController
   end
 
   def products
-    @products = PRODUCTS_LIST
+    @products = Product.all
   end
 end

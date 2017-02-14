@@ -1,0 +1,16 @@
+<div class="ls-list">
+  <header class="ls-list-header">
+    <div class="ls-list-title col-md-9">
+      <%= link_to plan.name, plan_prices_cart_path(@product, plan.name) %>
+    </div>
+    <div class="col-md-3 ls-txt-right">
+      <%= link_to 'Contratar', plan_prices_cart_path(@product, plan.name), class: 'ls-btn-primary' %>
+    </div>
+  </header>
+  <div class="ls-list-content ">
+    <div class="col-xs-12 col-md-12">
+      <span class="ls-list-label">Descrição</span>
+      <strong><%= plan.description %></strong>
+    </div>
+  </div>
+</div>
