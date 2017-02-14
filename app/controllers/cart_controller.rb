@@ -1,5 +1,5 @@
 class CartController < ApplicationController
-  PRODUCTS_LIST = [
+    PRODUCTS_LIST = [
     { name: 'Hospedagem', id: 1 },
     { name: 'Registro de Dominios', id: 2 },
     { name: 'Email Marketing', id: 3 }
@@ -9,7 +9,7 @@ class CartController < ApplicationController
     { name: 'Profissional', description: '', details: '' },
     { name: 'Premium', description: '', details: '' }
   ].freeze
-  
+
   PRICE_LIST = [
     { subscription: 'Mensal', price: 15 },
     { subscription: 'Trimestral', price: 40 },

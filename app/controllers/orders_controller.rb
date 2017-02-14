@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:checkout]
   def create
     if user_signed_in?
       @order = current_user.orders.new(order_params)
