@@ -1,11 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:checkout]
+  before_action :authenticate_user!, except: [:create]
   def create
-    if user_signed_in?
-      @order = current_user.orders.new(order_params)
-    else
-      @order = Order.new order_params
-    end
+    @order = Order.new(order_params)
+    current_user.orders << @order if user_signed_in?
     @order.save
     redirect_to checkout_order_path @order
   end
@@ -30,16 +27,14 @@ class OrdersController < ApplicationController
 
   def cancel
     @order = Order.find params[:id]
-    @order.status = 'canceled'
-    @order.save
+    @order.canceled!
     flash[:danger] = 'Pedido cancelado com sucesso'
     redirect_to @order
   end
 
   def finish
     @order = Order.find params[:id]
-    @order.status = 'closed'
-    @order.save
+    @order.closed!
     flash[:success] = 'Pedido finalizado com sucesso'
     redirect_to @order
   end
@@ -50,15 +45,21 @@ class OrdersController < ApplicationController
 
   def checkout
     @order = Order.find params[:id]
+    unless @order.user
+      if @order.source_ip == request.remote_ip
+        @order.user = current_user
+        @order.save
+      else
+        flash[:danger] = 'Não foi possível concluir a operação.'
+        redirect_to root_path
+      end
+    end
   end
 
   private
 
   def order_params
-    product = params[:product]
-    plan = params[:plan]
-    price = params[:price]
-    period = params[:period]
-    { product: product, plan: plan, price: price, period: period }
+    { product: params[:product], plan: params[:plan], price: params[:price],
+      period: params[:period], source_ip: request.remote_ip }
   end
 end

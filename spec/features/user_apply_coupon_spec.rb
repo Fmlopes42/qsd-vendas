@@ -2,22 +2,14 @@ require 'rails_helper'
 
 feature 'User apply coupon' do
   before do
-    user = create(:user)
-
-    visit new_user_session_path
-
-    within('section#sign-in-form') do
-      fill_in 'E-mail', with: user.email
-      fill_in 'Senha',  with: user.password
-
-      click_on 'Entrar'
-    end
+    @user = create(:user)
+    login_as @user, scope: :user
   end
 
   scenario 'successfuly' do
     coupon = Coupon.new key: 'cp001', type: 'fixed', value: 50
 
-    order = create(:order, coupon: nil)
+    order = create(:order, coupon: nil, user: @user)
 
     visit checkout_order_path(order)
 
@@ -32,7 +24,7 @@ feature 'User apply coupon' do
   end
 
   scenario 'apply invalid coupon' do
-    order = create(:order, coupon: nil)
+    order = create(:order, coupon: nil, user: @user)
     visit checkout_order_path(order)
 
     fill_in 'Insira seu cupom', with: 'CupomInvalido'
@@ -47,7 +39,7 @@ feature 'User apply coupon' do
 
   scenario 'apply relative coupon successfully' do
     coupon = Coupon.new key: 'cpr001', type: 'percent', value: 10
-    order = create(:order, coupon: nil)
+    order = create(:order, coupon: nil, user: @user)
     visit checkout_order_path(order)
 
     new_value = order.price.to_f * (1 - (coupon.value / 100.0))

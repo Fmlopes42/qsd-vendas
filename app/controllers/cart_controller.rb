@@ -1,5 +1,5 @@
 class CartController < ApplicationController
-    PRODUCTS_LIST = [
+  PRODUCTS_LIST = [
     { name: 'Hospedagem', id: 1 },
     { name: 'Registro de Dominios', id: 2 },
     { name: 'Email Marketing', id: 3 }
