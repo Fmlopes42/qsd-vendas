@@ -1,4 +1,4 @@
-class VendasController < ApplicationController
+class CartController < ApplicationController
   PRODUCTS_LIST = [
     { name: 'Hospedagem', id: 1 },
     { name: 'Registro de Dominios', id: 2 },
@@ -9,7 +9,7 @@ class VendasController < ApplicationController
     { name: 'Profissional', description: '', details: '' },
     { name: 'Premium', description: '', details: '' }
   ].freeze
-
+  
   PRICE_LIST = [
     { subscription: 'Mensal', price: 15 },
     { subscription: 'Trimestral', price: 40 },
@@ -17,46 +17,18 @@ class VendasController < ApplicationController
     { subscription: 'Anual', price: 140 }
   ].freeze
 
-  before_action :authenticate_user!, only: [:checkout]
-
-  def index
-    @products = PRODUCTS_LIST
-  end
-
-  def product
+  def plans
     @product = params[:product]
     @plans = PLANS_LIST
   end
 
-  def plan
+  def prices
     @product = params[:product]
     @plan = params[:plan]
     @prices = PRICE_LIST
   end
 
-  def checkout
-    @order = Order.find(params[:order])
-    unless @order.user_id?
-      @order.user = current_user
-      @order.save
-    end
-  end
-
-  def apply_coupon
-    @order = Order.find params[:order]
-    coupon = Coupon.find params[:coupon]
-
-    if coupon
-      @order.apply_coupon coupon
-      flash[:success] = 'Cupom aplicado com sucesso'
-    else
-      flash[:danger] = 'Cupom inválido'
-    end
-
-    redirect_to order_checkout_path @order
-  end
-
-  def resume_order
-    @order = Order.find(params[:order])
+  def products
+    @products = PRODUCTS_LIST
   end
 end

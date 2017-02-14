@@ -19,7 +19,7 @@ feature 'User apply coupon' do
 
     order = create(:order, coupon: nil)
 
-    visit order_checkout_path(order)
+    visit checkout_order_path(order)
 
     fill_in 'Insira seu cupom', with: coupon.key
     click_on 'Aplicar Cupom'
@@ -33,7 +33,7 @@ feature 'User apply coupon' do
 
   scenario 'apply invalid coupon' do
     order = create(:order, coupon: nil)
-    visit order_checkout_path(order)
+    visit checkout_order_path(order)
 
     fill_in 'Insira seu cupom', with: 'CupomInvalido'
     click_on 'Aplicar Cupom'
@@ -48,7 +48,7 @@ feature 'User apply coupon' do
   scenario 'apply relative coupon successfully' do
     coupon = Coupon.new key: 'cpr001', type: 'percent', value: 10
     order = create(:order, coupon: nil)
-    visit order_checkout_path(order)
+    visit checkout_order_path(order)
 
     new_value = order.price.to_f * (1 - (coupon.value / 100.0))
 
