@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Visitor chooses a price' do
+feature 'Visitor sees products/plans prices' do
   scenario 'successfully' do
     price_list = { mensal: 15, trimestral: 40, semestral: 75, anual: 140 }
 
