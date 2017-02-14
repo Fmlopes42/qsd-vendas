@@ -5,5 +5,6 @@ FactoryGirl.define do
     price '15'
     period 'Mensal'
     coupon 'hosP_3xKy72'
+    user
   end
 end

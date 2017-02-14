@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213191401) do
+ActiveRecord::Schema.define(version: 20170214173616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boletos", force: :cascade do |t|
+    t.integer  "payment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payment_id"], name: "index_boletos_on_payment_id", using: :btree
+  end
+
+  create_table "credits", force: :cascade do |t|
+    t.integer  "payment_id"
+    t.string   "card_name"
+    t.string   "card_number"
+    t.string   "card_validity"
+    t.string   "card_ccv"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["payment_id"], name: "index_credits_on_payment_id", using: :btree
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string   "product"
@@ -26,6 +44,13 @@ ActiveRecord::Schema.define(version: 20170213191401) do
     t.integer  "status"
     t.integer  "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,5 +71,8 @@ ActiveRecord::Schema.define(version: 20170213191401) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "boletos", "payments"
+  add_foreign_key "credits", "payments"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
 end

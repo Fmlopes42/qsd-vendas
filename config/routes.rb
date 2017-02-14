@@ -20,4 +20,9 @@ Rails.application.routes.draw do
       post ':product/:plan/:period/:price', to: 'orders#create', as: 'create_order'
     end
   end
+
+  resources :payments, only: [:create]
+
+
+
 end

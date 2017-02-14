@@ -50,6 +50,8 @@ class OrdersController < ApplicationController
 
   def checkout
     @order = Order.find params[:id]
+    @credit = Credit.new
+    @payment = Payment.new
   end
 
   private

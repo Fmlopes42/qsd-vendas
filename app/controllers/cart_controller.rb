@@ -1,9 +1,10 @@
 class CartController < ApplicationController
-    PRODUCTS_LIST = [
+  PRODUCTS_LIST = [
     { name: 'Hospedagem', id: 1 },
     { name: 'Registro de Dominios', id: 2 },
     { name: 'Email Marketing', id: 3 }
   ].freeze
+
   PLANS_LIST = [
     { name: 'Básico', description: '', details: '' },
     { name: 'Profissional', description: '', details: '' },
@@ -39,14 +40,12 @@ class CartController < ApplicationController
   def apply_coupon
     @order = Order.find params[:order]
     coupon = Coupon.find params[:coupon]
-
     if coupon
       @order.apply_coupon coupon
       flash[:success] = 'Cupom aplicado com sucesso'
     else
       flash[:danger] = 'Cupom inválido'
     end
-
     redirect_to order_checkout_path @order
   end
 
