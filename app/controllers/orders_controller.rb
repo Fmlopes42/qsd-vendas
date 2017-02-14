@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:create]
+  before_action :authenticate_user_to_order!, except: [:create, :checkout]
+
   def create
     @order = Order.new(order_params)
     current_user.orders << @order if user_signed_in?
@@ -8,7 +10,6 @@ class OrdersController < ApplicationController
   end
 
   def coupon
-    @order = Order.find params[:id]
     coupon = Coupon.find params[:coupon]
 
     if coupon
@@ -21,38 +22,27 @@ class OrdersController < ApplicationController
     redirect_to checkout_order_path @order
   end
 
-  def show
-    @order = Order.find params[:id]
-  end
+  def show; end
 
   def cancel
-    @order = Order.find params[:id]
     @order.canceled!
     flash[:danger] = 'Pedido cancelado com sucesso'
     redirect_to @order
   end
 
   def finish
-    @order = Order.find params[:id]
     @order.closed!
     flash[:success] = 'Pedido finalizado com sucesso'
     redirect_to @order
   end
 
-  def resume
-    @order = Order.find params[:id]
-  end
+  def resume; end
 
   def checkout
     @order = Order.find params[:id]
-    unless @order.user
-      if @order.source_ip == request.remote_ip
-        @order.user = current_user
-        @order.save
-      else
-        flash[:danger] = 'Não foi possível concluir a operação.'
-        redirect_to root_path
-      end
+    unless @order.check_integrity?(request.remote_ip, current_user)
+      flash[:danger] = 'Não foi possível concluir a operação.'
+      redirect_to root_path
     end
   end
 
@@ -61,5 +51,13 @@ class OrdersController < ApplicationController
   def order_params
     { product: params[:product], plan: params[:plan], price: params[:price],
       period: params[:period], source_ip: request.remote_ip }
+  end
+
+  def authenticate_user_to_order!
+    @order = Order.find params[:id]
+    unless @order.valid_user?(current_user)
+      flash[:danger] = 'Não foi possível concluir a operação.'
+      redirect_to root_path
+    end
   end
 end

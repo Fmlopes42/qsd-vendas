@@ -14,4 +14,19 @@ class Order < ApplicationRecord
 
     save
   end
+
+  def check_integrity?(request_ip, request_user)
+    if user.nil? && source_ip == request_ip
+      update(user: request_user)
+      true
+    elsif user.nil? && source_ip != request_ip
+      false
+    else
+      true
+    end
+  end
+
+  def valid_user?(request_user)
+    user == request_user
+  end
 end
