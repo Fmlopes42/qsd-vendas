@@ -2,7 +2,9 @@ require 'rails_helper'
 
 feature 'User finish order' do
   scenario 'Successfuly' do
-    order = create(:order)
+    user = create(:user)
+    login_as user, scope: :user
+    order = create(:order, user: user)
 
     visit resume_order_path order
     within 'div#order_actions' do

@@ -2,7 +2,9 @@ require 'rails_helper'
 
 feature 'user cancels order' do
   scenario 'successfully' do
-    order = create(:order)
+    user = create(:user)
+    login_as user, scope: :user
+    order = create(:order, user: user)
 
     visit resume_order_path order
     within 'div#order_actions' do
@@ -10,6 +12,7 @@ feature 'user cancels order' do
     end
 
     expect(page).to have_content 'Pedido cancelado com sucesso'
+
     within 'div#resume' do
       expect(page).to have_content order.product
       expect(page).to have_content order.plan
