@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :set_menus, only: [:show, :checkout, :resume]
   def create
     @order = Order.new order_params
     @order.save
