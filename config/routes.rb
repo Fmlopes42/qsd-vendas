@@ -13,12 +13,10 @@ Rails.application.routes.draw do
   end
 
   resource :cart, only: [] do
-    member do
-      get 'products'
+      get 'products', to: 'cart#products'
       get ':product/plans', to: 'cart#plans', as: 'product_plans'
       get ':product/:plan/prices', to: 'cart#prices', as: 'plan_prices'
       post ':product/:plan/:period/:price', to: 'orders#create', as: 'create_order'
-    end
   end
 
   resources :payments, only: [:create]

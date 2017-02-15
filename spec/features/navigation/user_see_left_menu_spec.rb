@@ -9,7 +9,6 @@ feature 'user sees left menu' do
 
     within 'nav.ls-menu' do
       expect(page).to have_link 'Início', href: root_path
-      expect(page).to have_link 'Meus Pedidos', href: '#'
       expect(page).to have_link 'Produtos', href: root_path
     end
   end

@@ -6,10 +6,15 @@
   Planos para <%= @product %>
 <% end %>
 
+<ol class="ls-breadcrumb">
+  <li>
+    <%= link_to 'Produtos', products_cart_path %>
+  </li>
+  <li>Planos</li>
+</ol>
+
 <section class="product">
   <% @plans.each do |plan| %>
     <%= render partial: 'plans/plan', locals: {plan: plan} %>
   <% end %>
 </section>
-
-<%= link_to 'Voltar', root_path %>

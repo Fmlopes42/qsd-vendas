@@ -7,7 +7,9 @@ feature 'User creates order' do
 
     visit plan_prices_cart_path order.product, order.plan
 
-    click_on 'Mensal'
+    within 'div#Mensal' do
+      click_on 'Contratar'
+    end
 
     within('section#sign-in-form') do
       fill_in 'E-mail', with: user.email
@@ -37,7 +39,9 @@ feature 'User creates order' do
 
     visit plan_prices_cart_path order.product, order.plan
 
-    click_on 'Mensal'
+    within 'div#Mensal' do
+      click_on 'Contratar'
+    end
 
     expect(page).to have_content order.product
     expect(page).to have_content order.plan
