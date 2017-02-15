@@ -24,5 +24,9 @@
     </fieldset>
   <% end %>
   <%= f.hidden_field :order_id, value: @order.id %>
+  <fieldset>
+    <%= label_tag :seller, 'Indicar vendedor' %>
+    <%= text_field_tag :seller %>
+  </fieldset>
   <%= f.submit 'Avançar', class: 'ls-btn' %>
 <% end %>

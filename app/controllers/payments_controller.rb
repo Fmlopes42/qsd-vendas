@@ -11,10 +11,12 @@ class PaymentsController < ApplicationController
       else
         msg = 'Não foi possível realizar seu pedido'
         flash[:danger] = msg
-        redirect_to resume_order_path @payment.order
+        redirect_to checkout_order_path @payment.order
         return
       end
     end
+    @payment.order.seller = User.seller.find_by(nickname: params[:seller])
+    @payment.order.save
     @payment.save
     flash[:success] = msg
     redirect_to resume_order_path @payment.order
