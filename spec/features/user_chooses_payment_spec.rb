@@ -15,7 +15,7 @@ feature 'User chooses payment' do
     fill_in 'Validade', with: '12/20'
     fill_in 'CCV', with: '000'
 
-    click_on 'Concluir'
+    click_on 'Avançar'
 
     expect(page).to have_content message
   end
@@ -29,7 +29,7 @@ feature 'User chooses payment' do
 
     choose 'Boleto'
 
-    click_on 'Concluir'
+    click_on 'Avançar'
 
     expect(page).to have_content message
   end
@@ -43,7 +43,7 @@ feature 'User chooses payment' do
 
     choose 'Crédito'
 
-    click_on 'Concluir'
+    click_on 'Avançar'
 
     expect(page).to have_content message
   end

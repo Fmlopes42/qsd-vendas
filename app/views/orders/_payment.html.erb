@@ -1,12 +1,12 @@
 <%= form_for @payment do |f| %>
   <fieldset>
     <p>Escolha uma forma de pagamento:</p>
-    <%= f.label :payment_boleto do %>
-      <%= f.radio_button :boleto, 'boleto' %>
+    <%= f.label :payment_type_boleto do %>
+      <%= radio_button_tag :payment_type, 'boleto' %>
       <strong> Boleto </strong>
     <% end %>
-    <%= f.label :payment_credit do %>
-      <%= f.radio_button :credit, 'credit' %>
+    <%= f.label :payment_type_credit do %>
+      <%= radio_button_tag :payment_type, 'credit' %>
       <strong> Crédito </strong>
     <% end %>
   </fieldset>
@@ -24,5 +24,5 @@
     </fieldset>
   <% end %>
   <%= f.hidden_field :order_id, value: @order.id %>
-  <%= f.submit 'Concluir', class: 'ls-btn' %>
+  <%= f.submit 'Avançar', class: 'ls-btn' %>
 <% end %>

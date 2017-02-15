@@ -6,4 +6,6 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   has_many :orders
+
+  enum role: [:customer, :seller, :admin]
 end
