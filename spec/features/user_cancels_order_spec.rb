@@ -5,6 +5,8 @@ feature 'user cancels order' do
     user = create(:user)
     login_as user, scope: :user
     order = create(:order, user: user)
+    payment = create(:payment, order: order)
+    create(:credit, payment: payment)
 
     visit resume_order_path order
     within 'div#order_actions' do
