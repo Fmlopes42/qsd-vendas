@@ -60,7 +60,7 @@ feature 'User creates order' do
       click_on 'Entrar'
     end
 
-    within('section#flash-messages') do
+    within('#flash-messages') do
       expect(page).to have_content 'Não foi possível concluir a operação.'
     end
   end

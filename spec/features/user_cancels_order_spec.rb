@@ -21,4 +21,18 @@ feature 'user cancels order' do
       expect(page).to have_css(:span, text: 'Cancelado')
     end
   end
+
+  scenario 'only if he/she is the order owner' do
+    another_user = create(:user)
+    order = create(:order, user: another_user)
+
+    user = create(:user)
+    login_as user, scope: :user
+
+    visit resume_order_path order
+
+    within('section#flash-messages') do
+      expect(page).to have_content 'Não foi possível concluir a operação.'
+    end
+  end
 end
