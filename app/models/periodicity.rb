@@ -18,5 +18,4 @@ class Periodicity
       new price
     end
   end
-
 end

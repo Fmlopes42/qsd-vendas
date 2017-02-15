@@ -1,28 +1,32 @@
-<%= form_for @payment do |f| %>
-  <fieldset>
-    <p>Escolha uma forma de pagamento:</p>
-    <%= f.label :payment_type_boleto do %>
-      <%= radio_button_tag :payment_type, 'boleto' %>
-      <strong> Boleto </strong>
-    <% end %>
-    <%= f.label :payment_type_credit do %>
-      <%= radio_button_tag :payment_type, 'credit' %>
-      <strong> Crédito </strong>
-    <% end %>
-  </fieldset>
-  <%= f.fields_for :credits do |credit_form| %>
+<div class="ls-box">
+  <%= form_for @payment do |f| %>
     <fieldset>
-      <p>Preencha se a forma de pagamento for cartão</p>
-      <%= credit_form.label :card_name, 'Titular' %>
-      <%= credit_form.text_field :card_name%>
-      <%= credit_form.label :card_number, 'Número' %>
-      <%= credit_form.text_field :card_number %>
-      <%= credit_form.label :card_validity, 'Validade' %>
-      <%= credit_form.text_field :card_validity %>
-      <%= credit_form.label :card_ccv, 'CCV' %>
-      <%= credit_form.text_field :card_ccv %>
+      <strong>
+      <p>Escolha uma forma de pagamento:</p>
+      </strong>
+      <%= f.label :payment_type_boleto do %>
+        <%= radio_button_tag :payment_type, 'boleto' %>
+        <strong> Boleto </strong>
+      <% end %>
+      <%= f.label :payment_type_credit do %>
+        <%= radio_button_tag :payment_type, 'credit' %>
+        <strong> Crédito </strong>
+      <% end %>
     </fieldset>
+    <%= f.fields_for :credits do |credit_form| %>
+      <fieldset>
+        <p>Preencha se a forma de pagamento for cartão</p>
+        <%= credit_form.label :card_name, 'Titular' %>
+        <%= credit_form.text_field :card_name%>
+        <%= credit_form.label :card_number, 'Número' %>
+        <%= credit_form.text_field :card_number %>
+        <%= credit_form.label :card_validity, 'Validade' %>
+        <%= credit_form.text_field :card_validity %>
+        <%= credit_form.label :card_ccv, 'CCV' %>
+        <%= credit_form.text_field :card_ccv %>
+      </fieldset>
+    <% end %>
+    <%= f.hidden_field :order_id, value: @order.id %>
+    <%= f.submit 'Avançar', class: 'ls-btn' %>
   <% end %>
-  <%= f.hidden_field :order_id, value: @order.id %>
-  <%= f.submit 'Avançar', class: 'ls-btn' %>
-<% end %>
+</div>

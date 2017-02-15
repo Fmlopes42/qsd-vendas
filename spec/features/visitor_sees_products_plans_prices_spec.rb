@@ -2,7 +2,6 @@ require 'rails_helper'
 
 feature 'Visitor sees products/plans prices' do
   scenario 'successfully' do
-
     product = Product.all.first
 
     plan = Plan.all.first

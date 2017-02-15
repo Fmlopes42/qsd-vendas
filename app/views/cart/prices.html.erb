@@ -6,8 +6,16 @@
   Periodos do plano <%= @plan %>
 <% end %>
 
+<ol class="ls-breadcrumb">
+  <li>
+    <%= link_to 'Produtos', products_cart_path %>
+  </li>
+  <li><%= link_to 'Planos', product_plans_cart_path(@product) %></li>
+  <li>Periodicidade</li>
+</ol>
+
+</br>
 <section id="plan">
-  <h3><%= @product %> / <%= @plan %></h3>
   <% @periodicity.each do |periodicity| %>
     <%= render partial: 'periodicities/periodicity', locals: {periodicity: periodicity} %>
   <% end %>
