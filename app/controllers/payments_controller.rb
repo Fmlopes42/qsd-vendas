@@ -11,19 +11,19 @@ class PaymentsController < ApplicationController
       else
         msg = 'Não foi possível realizar seu pedido'
         flash[:danger] = msg
-        redirect_to checkout_order_path @payment.order
+        redirect_to resume_order_path @payment.order
         return
       end
     end
     @payment.save
     flash[:success] = msg
-    redirect_to checkout_order_path @payment.order
+    redirect_to resume_order_path @payment.order
   end
 
   private
 
   def payment_params
-    params.require(:payment).permit(:order_id)
+    params.require(:payment).permit(:order_id, :credits)
   end
 
   def credit_params
@@ -33,6 +33,6 @@ class PaymentsController < ApplicationController
   end
 
   def payment_boleto?
-    params[:payment][:boleto] if params[:payment][:boleto] == 'boleto'
+    params[:payment_type] == 'boleto'
   end
 end
