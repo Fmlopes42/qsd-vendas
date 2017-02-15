@@ -26,7 +26,11 @@
         <%= credit_form.text_field :card_ccv %>
       </fieldset>
     <% end %>
+    <fieldset>
+      <%= label_tag :seller, 'Indicar vendedor' %>
+      <%= text_field_tag :seller %>
+    </fieldset>
     <%= f.hidden_field :order_id, value: @order.id %>
-    <%= f.submit 'Avançar', class: 'ls-btn' %>
+    <%= f.submit 'Avançar', class: 'ls-btn' %>    
   <% end %>
 </div>

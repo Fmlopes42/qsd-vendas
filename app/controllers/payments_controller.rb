@@ -15,6 +15,8 @@ class PaymentsController < ApplicationController
         return
       end
     end
+    @payment.order.seller = User.seller.find_by(nickname: params[:seller])
+    @payment.order.save
     @payment.save
     flash[:success] = msg
     redirect_to resume_order_path @payment.order

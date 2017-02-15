@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
+  belongs_to :seller, class_name: User, optional: true
   has_one :payment
 
   enum status: [:opened, :closed, :canceled]
