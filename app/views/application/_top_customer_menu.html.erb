@@ -1,0 +1,13 @@
+<a href="#" class="ls-ico-user">
+  <%= image_tag 'avatar.png' %>
+  <span class="ls-name"><%= current_user.name %></span>
+</a>
+
+<nav class="ls-dropdown-nav ls-user-menu">
+  <ul>
+    <li><a href="#">Meus dados</a></li>
+    <li><a href="#">Pedidos</a></li>
+    <li><%= link_to t('nav.sign_out'), destroy_user_session_path, method: 'DELETE' %></li>
+  </ul>
+</nav>
+

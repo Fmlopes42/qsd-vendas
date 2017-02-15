@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
   private
 
   def menu_scope
-    user_signed_in? ? 'user' : 'visitor'
+    menu_scope = 'visitor'
+    menu_scope = current_user.role if user_signed_in?
+    menu_scope
   end
 
   def store_current_location

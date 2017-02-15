@@ -4,6 +4,13 @@ class Order < ApplicationRecord
 
   enum status: [:opened, :closed, :canceled]
 
+  def self.statuses_attributes
+    statuses.keys.map do |status|
+      { value: I18n.t("activerecord.attributes.order.statuses.#{status}"),
+        key: status }
+    end
+  end
+
   def apply_coupon(informed_coupon)
     self.coupon = informed_coupon.key
 

@@ -9,6 +9,11 @@ pt-BR:
         email: E-mail
         password: Senha
         password_confirmation: Confirmação de Senha
+      order:
+        statuses:
+          opened: Aberto
+          closed: Finalizado
+          canceled: Cancelado
   buttons:
     create_account: Criar Conta
     sign_in: Entrar

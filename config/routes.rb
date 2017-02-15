@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'cart#products'
+  
+  namespace :admin do
+    resources :orders, only: [:index]
+  end
 
   resources :orders, only: [:show, :create] do
     member do

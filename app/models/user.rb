@@ -8,4 +8,12 @@ class User < ApplicationRecord
   has_many :orders
 
   enum role: [:customer, :seller, :admin]
+
+  before_create :set_default_role
+
+  private
+
+  def set_default_role
+    self.role ||= :customer
+  end
 end
