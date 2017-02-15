@@ -45,6 +45,8 @@ class OrdersController < ApplicationController
       flash[:danger] = 'Não foi possível concluir a operação.'
       redirect_to root_path
     end
+    @credit = Credit.new
+    @payment = Payment.new
   end
 
   private

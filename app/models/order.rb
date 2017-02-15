@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
+  has_one :payment
 
   enum status: [:opened, :closed, :canceled]
 
@@ -22,7 +23,7 @@ class Order < ApplicationRecord
     elsif user.nil? && source_ip != request_ip
       false
     else
-      true
+      valid_user?(request_user)
     end
   end
 
