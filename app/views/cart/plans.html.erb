@@ -1,10 +1,22 @@
+<%= content_for :header_title do %>
+  Contratar Produto
+<% end %>
+
+<%= content_for :page_title do %>
+  Planos para <%= @product %>
+<% end %>
+
+<ol class="ls-breadcrumb">
+  <li>
+    <%= link_to 'Produtos', products_cart_path %>
+  </li>
+  <li>Planos</li>
+</ol>
+
+</br>
+
 <section class="product">
-  <h3><%= @product %></h3>
   <% @plans.each do |plan| %>
-    <%= link_to plan[:name], plan_prices_cart_path(@product, plan[:name]) %>
-    <%= plan[:description] %>
-    <%= plan[:details] %>
+    <%= render partial: 'plans/plan', locals: {plan: plan} %>
   <% end %>
 </section>
-
-<%= link_to 'Voltar', root_path %>

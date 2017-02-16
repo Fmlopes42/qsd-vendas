@@ -2,15 +2,17 @@ require 'rails_helper'
 
 feature 'Visitor sees products/plans prices' do
   scenario 'successfully' do
-    price_list = { mensal: 15, trimestral: 40, semestral: 75, anual: 140 }
+    product = Product.all.first
 
-    visit plan_prices_cart_path('Hospedagem', 'Premium')
+    plan = Plan.all.first
 
-    price_list.each do |subscription, price|
-      expect(page).to have_link subscription.to_s.camelcase
-      expect(page).to have_link price.to_s
+    periodicities_list = Periodicity.all
+
+    visit plan_prices_cart_path(product.name, plan.name)
+
+    periodicities_list.each do |periodicity|
+      expect(page).to have_link periodicity.name
+      expect(page).to have_content periodicity.price
     end
-
-    expect(page).to have_css('h3', text: 'Hospedagem / Premium')
   end
 end

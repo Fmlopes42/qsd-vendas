@@ -1,31 +1,45 @@
-<section id='sign-in-form'>
-  <%= form_for(resource, as: resource_name,
-                         url: session_path(resource_name),
-                         class: 'ls-form row') do |f| %>
-    <fieldset>
-      <%= devise_error_messages! %>
-      <%= f.label :email, class: 'ls-label col-md-3' do %>
-        <b class="ls-label-text"><%= t('activerecord.attributes.user.email') %></b>
-        <%= f.email_field :email, autofocus: true %>
-      <% end %>
-
-      <%= f.label :password, class: 'ls-label col-md-3' do %>
-        <b class="ls-label-text"><%= t('activerecord.attributes.user.password') %></b>
-        <%= f.password_field :password, autocomplete: "off" %>
-      <% end %>
-
-        <% if devise_mapping.rememberable? -%>
-        <div class="ls-label col-md-3">
-          <label class="ls-label-text">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </label>
-        </div>
-      <% end -%>
-
-      <div class="ls-actions-btn">
-        <%= f.submit t('buttons.sign_in'), class: 'ls-btn' %>
+<div class="row">
+  <div class="col-md-3"></div>
+  <section id='sign-in-form'>
+    <div class="col-md-3">
+      <div class="ls-box ls-box-gray">
+        <%= form_for(resource, as: resource_name,
+                               url: session_path(resource_name),
+                               class: 'ls-form row') do |f| %>
+          <fieldset>
+            <%= devise_error_messages! %>
+            <%= f.label :email, class: 'ls-label' do %>
+              <b class="ls-label-text"><%= t('activerecord.attributes.user.email') %></b>
+              <%= f.email_field :email, autofocus: true %>
+            <% end %>
+            <%= f.label :password, class: 'ls-label' do %>
+              <b class="ls-label-text"><%= t('activerecord.attributes.user.password') %></b>
+              <%= f.password_field :password, autocomplete: "off" %>
+            <% end %>
+            <% if devise_mapping.rememberable? -%>
+              <div class="ls-label">
+                <%= f.label :remember_me, class: 'ls-label-text' do%>
+                  <%= f.check_box :remember_me %>
+                  <%= t('activerecord.attributes.user.remember_me') %>
+                <% end %>
+              </div>
+            <% end -%>
+            <!-- <div class="ls-actions-btn"> -->
+              <%= f.submit t('buttons.sign_in'), class: 'ls-btn' %>
+            <!-- </div> -->
+          </fieldset>
+        <% end %>
       </div>
-    </fieldset>
-  <% end %>
-</section>
+    </div>
+  </section>
+  <section id="registration">
+    <div class="col-md-3">
+      <div class="ls-box ls-box-gray">
+        <h3>Não é cadastrado?</h3>
+        <p>Cadastre-se agora para continuar utilizando nossos serviços</p>
+        <%= link_to t('nav.sign_up'), new_user_registration_path, class: 'ls-btn-primary ls-btn-lg' %>
+      </div>
+    </div>
+  </section>
+  <div class="col-md-3"></div>
+</div>

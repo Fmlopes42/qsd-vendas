@@ -1,16 +1,20 @@
 module DeviseHelper
   def devise_error_messages!
-    return '' if resource.errors.empty?
+    return if resource.errors.empty?
 
-    messages = resource.errors.full_messages
-                       .map { |msg| content_tag(:p, msg) }.join
-    sentence = I18n.t('errors.messages.not_saved',
-                      count: resource.errors.count,
-                      resource: resource.class.model_name.human.downcase)
-    html = <<-HTML
-    <div class="ls-alert-danger"><h3>#{sentence}</h3> #{messages} </div>
-    HTML
+    safe_join(['<div class="ls-alert-danger"><h3>'.html_safe,
+               sentence, '</h3>'.html_safe, messages, '</div>'.html_safe])
+  end
 
-    html.html_safe
+  private
+
+  def messages
+    resource.errors.full_messages.map { |msg| content_tag(:p, msg) }.join
+  end
+
+  def sentence
+    I18n.t('errors.messages.not_saved',
+           count: resource.errors.count,
+           resource: resource.class.model_name.human.downcase)
   end
 end

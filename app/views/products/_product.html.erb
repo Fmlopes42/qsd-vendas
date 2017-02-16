@@ -1,0 +1,24 @@
+<div class="ls-list">
+  <header class="ls-list-header">
+    <div class="col-md-9">
+      <%= image_tag 'product.jpg', class: 'ls-list-image' %>
+    </div>
+    <div class="col-md-3 ls-txt-right">
+      <%= link_to 'Contratar', product_plans_cart_path(product.name), class: 'ls-btn-primary' %>
+    </div>
+  </header>
+  <div class="ls-list-content ">
+    <div class="col-xs-12 col-md-4">
+      <span class="ls-list-label">Produto</span>
+      <%= link_to product_plans_cart_path(product.name) do %>
+      <strong class='ls-color-theme'>
+        <%= product.name %>
+      </strong>
+      <% end %>
+    </div>
+    <div class="col-xs-12 col-md-8">
+      <span class="ls-list-label">Descrição</span>
+      <strong><%= product.description %></strong>
+    </div>
+  </div>
+</div>

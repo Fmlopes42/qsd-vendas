@@ -1,37 +1,58 @@
+<% content_for :header_title do %>
+  Administrador
+<% end %>
+<% content_for :page_title do %>
+  Pedidos
+<% end %>
+
 <section id="orders-filter">
-  <div class="ls-group-btn ls-group-active">
-    <%= link_to 'Todos', admin_orders_path, class: 'ls-btn-primary' %>
-    <% @statuses.each do |status| %>
-      <%= link_to status[:value], admin_orders_path(filter: status[:key]), class: "ls-btn-primary #{active?(status[:key], @current_filter)}" %>
-    <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ls-box ls-box-gray">
+        <h3>Filtro</h3>
+        <br>
+        <div class="ls-group-btn ls-group-active">
+          <%= link_to 'Todos', admin_orders_path, class: "ls-btn-primary #{button_active?(nil, @current_filter)}" %>
+          <% @statuses.each do |status| %>
+            <%= link_to status[:value], admin_orders_path(filter: status[:key]), class: "ls-btn-primary #{button_active?(status[:key], @current_filter)}" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="orders">
-  <table class="ls-table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Produto</th>
-        <th>Plano</th>
-        <th>Período</th>
-        <th>Preço</th>
-        <th>Cliente</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-     <tbody>
-       <% @orders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.product %></td>
-            <td><%= order.plan %></td>
-            <td><%= order.period %></td>
-            <td><%= order.price %></td>
-            <td><%= order.user.name %></td>
-            <td><%= order.status %></td>
-          </tr>
-       <% end %>
-     </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-12">
+      <% unless @orders.empty? %>
+        <table class="ls-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Produto</th>
+              <th>Plano</th>
+              <th>Período</th>
+              <th>Preço</th>
+              <th>Cliente</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+           <tbody>
+             <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.id %></td>
+                  <td><%= order.product %></td>
+                  <td><%= order.plan %></td>
+                  <td><%= order.period %></td>
+                  <td><%= order.price %></td>
+                  <td><%= order.user.name %></td>
+                  <td><%= order.status %></td>
+                </tr>
+             <% end %>
+           </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
 </section>

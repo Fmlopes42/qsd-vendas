@@ -7,6 +7,7 @@ FactoryGirl.define do
     coupon 'hosP_3xKy72'
     source_ip '0.0.0.0'
     status nil
+    payment nil
     user nil
   end
 end

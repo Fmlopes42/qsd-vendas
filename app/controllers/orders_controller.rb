@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_menus, only: [:show, :checkout, :resume]
-  before_action :authenticate_user!, except: [:create]
+  before_action :authenticate_user!, except: [:create, :checkout]
   before_action :authenticate_user_to_order!, except: [:create, :checkout]
 
   def create
@@ -41,6 +41,7 @@ class OrdersController < ApplicationController
 
   def checkout
     @order = Order.find params[:id]
+    authenticate_user_to_checkout
     unless @order.check_integrity?(request.remote_ip, current_user)
       flash[:danger] = 'Não foi possível concluir a operação.'
       redirect_to root_path
@@ -58,9 +59,15 @@ class OrdersController < ApplicationController
 
   def authenticate_user_to_order!
     @order = Order.find params[:id]
-    unless @order.valid_user?(current_user)
-      flash[:danger] = 'Não foi possível concluir a operação.'
-      redirect_to root_path
-    end
+    return if @order.valid_user?(current_user)
+    flash[:danger] = 'Não foi possível concluir a operação.'
+    redirect_to root_path
+  end
+
+  def authenticate_user_to_checkout
+    return if user_signed_in?
+    flash[:info] = 'Para continuar o checkout do pedido' \
+      "#{@order.id} faça login ou registre-se"
+    redirect_to new_user_session_path
   end
 end

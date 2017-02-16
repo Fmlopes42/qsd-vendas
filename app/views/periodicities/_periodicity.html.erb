@@ -1,0 +1,11 @@
+<div data-ls-module="collapse" data-target="#0" class="ls-collapse " id="<%= periodicity.name %>">
+  <a href="#" class="ls-collapse-header">
+    <h3 class="ls-collapse-title"><%= periodicity.name %></h3>
+    <p>R$ <%= periodicity.price %></p>
+  </a>
+  <div class="ls-collapse-body" id="0">
+    <p>
+      <%= link_to 'Contratar', create_order_cart_path(@product, @plan, periodicity.price, periodicity.name),{ method: 'post', class: 'ls-btn-primary' } %>
+    </p>
+  </div>
+</div>

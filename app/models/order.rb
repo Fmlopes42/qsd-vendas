@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
+  belongs_to :seller, class_name: User, optional: true
   has_one :payment
+
+  before_create :set_default_status
 
   enum status: [:opened, :closed, :canceled]
 
@@ -36,5 +39,11 @@ class Order < ApplicationRecord
 
   def valid_user?(request_user)
     user == request_user
+  end
+
+  private
+
+  def set_default_status
+    self.status ||= :opened
   end
 end

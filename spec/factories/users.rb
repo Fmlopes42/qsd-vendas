@@ -5,5 +5,6 @@ FactoryGirl.define do
     password              { Faker::Internet.password }
     password_confirmation { password }
     role                  :customer
+    nickname              { Faker::Internet.user_name }
   end
 end
