@@ -1,9 +1,13 @@
-<div class="ls-box">
-  <%= form_for @payment do |f| %>
+<%= form_for @payment do |f| %>
+  <div class="ls-box">
     <fieldset>
-      <strong>
-      <p>Escolha uma forma de pagamento:</p>
-      </strong>
+      <%= label_tag :seller, 'Indicar vendedor' %>
+      <%= text_field_tag :seller %>
+    </fieldset>
+  </div>
+  <div class="ls-box">
+    <fieldset>
+      <p><h4>Escolha uma forma de pagamento:</h4></p>
       <%= f.label :payment_type_boleto do %>
         <%= radio_button_tag :payment_type, 'boleto' %>
         <strong> Boleto </strong>
@@ -16,21 +20,17 @@
     <%= f.fields_for :credits do |credit_form| %>
       <fieldset>
         <p>Preencha se a forma de pagamento for cartão</p>
-        <%= credit_form.label :card_name, 'Titular' %>
+        <p><%= credit_form.label :card_name, 'Titular' %>
         <%= credit_form.text_field :card_name%>
         <%= credit_form.label :card_number, 'Número' %>
-        <%= credit_form.text_field :card_number %>
-        <%= credit_form.label :card_validity, 'Validade' %>
+        <%= credit_form.text_field :card_number %></p>
+        <p><%= credit_form.label :card_validity, 'Validade' %>
         <%= credit_form.text_field :card_validity %>
         <%= credit_form.label :card_ccv, 'CCV' %>
-        <%= credit_form.text_field :card_ccv %>
+        <%= credit_form.text_field :card_ccv %></p>
       </fieldset>
     <% end %>
-    <fieldset>
-      <%= label_tag :seller, 'Indicar vendedor' %>
-      <%= text_field_tag :seller %>
-    </fieldset>
     <%= f.hidden_field :order_id, value: @order.id %>
-    <%= f.submit 'Avançar', class: 'ls-btn' %>    
-  <% end %>
-</div>
+    <%= f.submit 'Avançar', class: 'ls-btn' %>
+  </div>
+<% end %>
