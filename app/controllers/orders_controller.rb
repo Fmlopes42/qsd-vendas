@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     current_user.orders << @order if user_signed_in?
+    @order.status = 'opened'
     @order.save
     redirect_to checkout_order_path @order
   end
@@ -37,7 +38,10 @@ class OrdersController < ApplicationController
     redirect_to @order
   end
 
-  def resume; end
+  def resume
+    @order = Order.find params[:id]
+    redirect_to @order unless @order.opened?
+  end
 
   def checkout
     @order = Order.find params[:id]

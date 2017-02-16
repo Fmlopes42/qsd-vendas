@@ -9,14 +9,14 @@ feature 'User apply coupon' do
   scenario 'successfuly' do
     coupon = Coupon.new key: 'cp001', type: 'fixed', value: 50
 
-    order = create(:order, coupon: nil, user: @user)
+    order = create(:order, coupon: nil, user: @user, price: 60)
 
     visit checkout_order_path(order)
 
     fill_in 'Insira seu cupom', with: coupon.key
     click_on 'Aplicar Cupom'
     within('strong#price') do
-      expect(page).to have_content order.price.to_f - coupon.value
+      expect(page).to have_content order.price - coupon.value
     end
 
     expect(page).to have_content 'Cupom aplicado com sucesso'
@@ -42,7 +42,7 @@ feature 'User apply coupon' do
     order = create(:order, coupon: nil, user: @user)
     visit checkout_order_path(order)
 
-    new_value = order.price.to_f * (1 - (coupon.value / 100.0))
+    new_value = order.price * (1 - (coupon.value / 100.0))
 
     fill_in 'Insira seu cupom', with: coupon.key
     click_on 'Aplicar Cupom'
@@ -50,6 +50,23 @@ feature 'User apply coupon' do
     within('strong#price') do
       expect(page).to have_content new_value
     end
+    expect(page).to have_content 'Cupom aplicado com sucesso'
+    expect(page).not_to have_css 'form#coupon_form'
+  end
+
+  scenario 'coupon discount is bigger than product value' do
+    coupon = Coupon.new key: 'cp001', type: 'fixed', value: 50
+
+    order = create(:order, coupon: nil, user: @user, price: 30)
+
+    visit checkout_order_path(order)
+
+    fill_in 'Insira seu cupom', with: coupon.key
+    click_on 'Aplicar Cupom'
+    within('strong#price') do
+      expect(page).to have_content '0.0'
+    end
+
     expect(page).to have_content 'Cupom aplicado com sucesso'
     expect(page).not_to have_css 'form#coupon_form'
   end
