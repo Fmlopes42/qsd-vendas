@@ -19,6 +19,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise', '~> 4.2'
 
+gem 'rest-client'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
