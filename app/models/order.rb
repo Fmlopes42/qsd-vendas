@@ -6,12 +6,12 @@ class Order < ApplicationRecord
 
   def apply_coupon(informed_coupon)
     self.coupon = informed_coupon.key
-    if informed_coupon.type == 'fixed'
-      self.price = price.to_f - informed_coupon.value
-    else
-      self.price = price.to_f * calculate_percent(informed_coupon.value)
-    end
-    self.price = 0 if price.to_f.negative?
+    self.price = if informed_coupon.type.eql? 'fixed'
+                   price - informed_coupon.value
+                 else
+                   price * calculate_percent(informed_coupon.value)
+                 end
+    self.price = 0 if price.negative?
     save
   end
 

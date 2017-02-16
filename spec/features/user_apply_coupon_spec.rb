@@ -16,7 +16,7 @@ feature 'User apply coupon' do
     fill_in 'Insira seu cupom', with: coupon.key
     click_on 'Aplicar Cupom'
     within('strong#price') do
-      expect(page).to have_content order.price.to_f - coupon.value
+      expect(page).to have_content order.price - coupon.value
     end
 
     expect(page).to have_content 'Cupom aplicado com sucesso'
@@ -42,7 +42,7 @@ feature 'User apply coupon' do
     order = create(:order, coupon: nil, user: @user)
     visit checkout_order_path(order)
 
-    new_value = order.price.to_f * (1 - (coupon.value / 100.0))
+    new_value = order.price * (1 - (coupon.value / 100.0))
 
     fill_in 'Insira seu cupom', with: coupon.key
     click_on 'Aplicar Cupom'

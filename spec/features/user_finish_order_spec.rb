@@ -35,4 +35,11 @@ feature 'User finish order' do
       expect(page).to have_content 'Não foi possível concluir a operação.'
     end
   end
+
+  scenario 'cant alter an order that is not opened' do
+    order = create(:order, status: 'closed')
+
+    visit resume_order_path order
+    expect(page).to_not have_current_path resume_order_path order
+  end
 end
