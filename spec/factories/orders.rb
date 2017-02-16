@@ -7,6 +7,7 @@ FactoryGirl.define do
     period 'Mensal'
     coupon 'hosP_3xKy72'
     source_ip '0.0.0.0'
+    payment nil
     user nil
   end
 end

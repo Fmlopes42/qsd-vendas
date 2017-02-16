@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20170215200925) do
     t.integer  "user_id"
     t.string   "source_ip"
     t.float    "price"
+    t.integer  "seller_id"
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170215200925) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "role"
+    t.string   "nickname"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
